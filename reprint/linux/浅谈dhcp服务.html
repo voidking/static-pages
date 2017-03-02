@@ -1,0 +1,684 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv=Content-Type  content="text/html; charset=gb2312" ><title>浅谈 dhcp服务</title><!--[if gte mso 9]><xml><w:WordDocument><w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel><w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery><w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery><w:DocumentKind>DocumentNotSpecified</w:DocumentKind><w:DrawingGridVerticalSpacing>7.8 磅</w:DrawingGridVerticalSpacing><w:PunctuationKerning></w:PunctuationKerning><w:View>Web</w:View><w:Compatibility><w:DontGrowAutofit/><w:UseFELayout/></w:Compatibility><w:Zoom>0</w:Zoom></w:WordDocument></xml><![endif]--><!--[if gte mso 9]><xml><w:LatentStyles DefLockedState="false"  DefUnhideWhenUsed="true"  DefSemiHidden="true"  DefQFormat="false"  DefPriority="99"  LatentStyleCount="260" >
+<w:LsdException Locked="false"  Priority="1"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="Normal" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="5"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="6"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="7"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="8"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="9"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="10"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="2"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="2"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="2"  UnhideWhenUsed="false"  QFormat="true"  Name="heading 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="39"  UnhideWhenUsed="false"  QFormat="true"  Name="toc 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Normal Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="footnote text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="annotation text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="header" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="footer" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="index heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="35"  UnhideWhenUsed="false"  QFormat="true"  Name="caption" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="table of figures" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="envelope address" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="envelope return" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="footnote reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="annotation reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="line number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="page number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="endnote reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="endnote text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="table of authorities" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="macro" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="toa heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Bullet" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Bullet 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Bullet 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Bullet 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Bullet 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Number 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Number 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Number 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Number 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="10"  UnhideWhenUsed="false"  QFormat="true"  Name="Title" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Closing" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Signature" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="1"  SemiHidden="false"  Name="Default Paragraph Font" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Continue" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Continue 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Continue 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Continue 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="List Continue 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Message Header" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="11"  UnhideWhenUsed="false"  QFormat="true"  Name="Subtitle" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Salutation" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Date" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text First Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text First Indent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Note Heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text Indent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Body Text Indent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Block Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Hyperlink" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="FollowedHyperlink" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="22"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="Strong" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="22"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="Emphasis" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Document Map" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Plain Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="E-mail Signature" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Normal (Web)" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Acronym" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Address" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Cite" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Code" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Definition" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Keyboard" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="19"  SemiHidden="false"  UnhideWhenUsed="false"  QFormat="true"  Name="HTML Preformatted" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Sample" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Typewriter" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="HTML Variable" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Normal Table" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="annotation subject" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="No List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Simple 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Simple 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Simple 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Classic 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Classic 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Classic 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Classic 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Colorful 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Colorful 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Colorful 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Columns 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Columns 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Columns 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Columns 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Columns 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Grid 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table List 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table 3D effects 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table 3D effects 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table 3D effects 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Contemporary" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Elegant" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Professional" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Subtle 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Subtle 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Web 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Web 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Web 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  UnhideWhenUsed="false"  Name="Balloon Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="59"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Table Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="0"  UnhideWhenUsed="false"  Name="Table Theme" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="60"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Shading Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="61"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="62"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Light Grid Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="63"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="64"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Shading 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="65"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="66"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium List 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="67"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="68"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="69"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Medium Grid 3 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="70"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Dark List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="71"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Shading Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="72"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="73"  SemiHidden="false"  UnhideWhenUsed="false"  Name="Colorful Grid Accent 6" ></w:LsdException>
+</w:LatentStyles></xml><![endif]--><style>
+@font-face{
+font-family:"Times New Roman";
+}
+
+@font-face{
+font-family:"宋体";
+}
+
+@font-face{
+font-family:"Wingdings";
+}
+
+@font-face{
+font-family:"Calibri";
+}
+
+@font-face{
+font-family:"Segoe UI";
+}
+
+@list l0:level1{
+mso-level-number-format:decimal;
+mso-level-suffix:tab;
+mso-level-text:"%1.";
+mso-level-tab-stop:39.0000pt;
+mso-level-number-position:left;
+margin-left:39.0000pt; text-indent:-18.0000pt; font-family:'Times New Roman'; }
+
+@list l1:level1{
+mso-level-number-format:bullet;
+mso-level-suffix:tab;
+mso-level-text:\F06C;
+mso-level-tab-stop:81.0000pt;
+mso-level-number-position:left;
+margin-left:81.0000pt; text-indent:-18.0000pt; font-family:Wingdings; }
+
+@list l2:level1{
+mso-level-number-format:decimal;
+mso-level-suffix:tab;
+mso-level-text:"%1.";
+mso-level-tab-stop:18.0000pt;
+mso-level-number-position:left;
+margin-left:18.0000pt; text-indent:-18.0000pt; font-family:'Times New Roman'; }
+
+@list l3:level1{
+mso-level-number-format:bullet;
+mso-level-suffix:tab;
+mso-level-text:\F06C;
+mso-level-tab-stop:18.0000pt;
+mso-level-number-position:left;
+margin-left:18.0000pt; text-indent:-18.0000pt; font-family:Wingdings; }
+
+@list l4:level1{
+mso-level-number-format:bullet;
+mso-level-suffix:tab;
+mso-level-text:\F06C;
+mso-level-tab-stop:60.0000pt;
+mso-level-number-position:left;
+margin-left:60.0000pt; text-indent:-18.0000pt; font-family:Wingdings; }
+
+@list l5:level1{
+mso-level-number-format:decimal;
+mso-level-suffix:tab;
+mso-level-text:"%1.";
+mso-level-tab-stop:60.0000pt;
+mso-level-number-position:left;
+margin-left:60.0000pt; text-indent:-18.0000pt; font-family:'Times New Roman'; }
+
+@list l6:level1{
+mso-level-number-format:bullet;
+mso-level-suffix:tab;
+mso-level-text:\F06C;
+mso-level-tab-stop:39.0000pt;
+mso-level-number-position:left;
+margin-left:39.0000pt; text-indent:-18.0000pt; font-family:Wingdings; }
+
+@list l7:level1{
+mso-level-number-format:bullet;
+mso-level-suffix:tab;
+mso-level-text:\F06C;
+mso-level-tab-stop:102.0000pt;
+mso-level-number-position:left;
+margin-left:102.0000pt; text-indent:-18.0000pt; font-family:Wingdings; }
+
+@list l8:level1{
+mso-level-number-format:decimal;
+mso-level-suffix:tab;
+mso-level-text:"%1.";
+mso-level-tab-stop:81.0000pt;
+mso-level-number-position:left;
+margin-left:81.0000pt; text-indent:-18.0000pt; font-family:'Times New Roman'; }
+
+@list l9:level1{
+mso-level-number-format:decimal;
+mso-level-suffix:tab;
+mso-level-text:"%1.";
+mso-level-tab-stop:102.0000pt;
+mso-level-number-position:left;
+margin-left:102.0000pt; text-indent:-18.0000pt; font-family:'Times New Roman'; }
+
+p.MsoNormal{
+mso-style-name:正文;
+mso-style-parent:"";
+margin-bottom:10.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:11.0000pt;
+}
+
+h1{
+mso-style-name:"标题 1";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:1;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-weight:bold;
+font-size:15.0000pt;
+}
+
+h2{
+mso-style-name:"标题 2";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:2;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-weight:bold;
+font-size:13.0000pt;
+}
+
+h3{
+mso-style-name:"标题 3";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:3;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-weight:bold;
+font-size:11.0000pt;
+}
+
+h4{
+mso-style-name:"标题 4";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:4;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-size:11.0000pt;
+}
+
+h5{
+mso-style-name:"标题 5";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:5;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-style:italic;
+font-size:11.0000pt;
+}
+
+h6{
+mso-style-name:"标题 6";
+mso-style-next:正文;
+margin-top:10.0000pt;
+margin-bottom:0.0000pt;
+mso-outline-level:6;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-weight:bold;
+font-size:10.0000pt;
+}
+
+span.10{
+font-family:'Times New Roman';
+}
+
+span.15{
+font-family:'Times New Roman';
+font-size:9.0000pt;
+}
+
+span.16{
+font-family:'Times New Roman';
+}
+
+span.17{
+font-family:'Times New Roman';
+color:rgb(128,128,128);
+}
+
+span.18{
+font-family:'Times New Roman';
+font-weight:bold;
+}
+
+span.19{
+font-family:'Times New Roman';
+font-style:italic;
+}
+
+span.20{
+font-family:'Times New Roman';
+color:rgb(0,0,255);
+text-decoration:underline;
+text-underline:single;
+}
+
+span.21{
+font-family:'Times New Roman';
+}
+
+p.NewStyle22{
+mso-style-name:"Padder Between Title and Properties";
+mso-style-noshow:yes;
+margin-bottom:1.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:1.0000pt;
+}
+
+p.NewStyle23{
+mso-style-name:PublishStatus_Accessible;
+mso-style-noshow:yes;
+margin-top:6.0000pt;
+margin-bottom:2.0000pt;
+border-top:0.5000pt solid rgb(253,189,94);
+mso-border-top-alt:0.5000pt solid rgb(253,189,94);
+border-right:0.5000pt solid rgb(253,189,94);
+mso-border-right-alt:0.5000pt solid rgb(253,189,94);
+border-bottom:0.5000pt solid rgb(253,189,94);
+mso-border-bottom-alt:0.5000pt solid rgb(253,189,94);
+border-left:0.5000pt solid rgb(253,189,94);
+mso-border-left-alt:0.5000pt solid rgb(253,189,94);
+padding:1pt 4pt 1pt 4pt ;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:9.0000pt;
+}
+
+p.NewStyle24{
+mso-style-name:"Publish with line";
+mso-style-noshow:yes;
+margin-bottom:0.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(22,54,92);
+font-weight:bold;
+font-size:16.0000pt;
+}
+
+p.p{
+mso-style-name:"普通\(网站\)";
+margin-bottom:10.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:11.0000pt;
+}
+
+p.NewStyle26{
+mso-style-name:Categories;
+mso-style-noshow:yes;
+mso-style-parent:Account;
+margin-bottom:0.0000pt;
+font-family:'Segoe UI';
+color:rgb(79,129,189);
+font-size:9.0000pt;
+}
+
+p.MsoAcetate{
+mso-style-name:批注框文本;
+mso-style-noshow:yes;
+margin-bottom:0.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:9.0000pt;
+}
+
+p.NewStyle28{
+mso-style-name:"Padder Between Control and Body";
+mso-style-noshow:yes;
+mso-style-next:正文;
+margin-bottom:6.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:1.0000pt;
+}
+
+p.NewStyle29{
+mso-style-name:"List Paragraph";
+mso-style-noshow:yes;
+margin-bottom:10.0000pt;
+margin-left:36.0000pt;
+mso-add-space:auto;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:11.0000pt;
+}
+
+p.NewStyle30{
+mso-style-name:"Publish Status";
+mso-style-noshow:yes;
+margin-top:6.0000pt;
+margin-bottom:2.0000pt;
+border-top:0.5000pt solid rgb(253,189,94);
+mso-border-top-alt:0.5000pt solid rgb(253,189,94);
+border-right:0.5000pt solid rgb(253,189,94);
+mso-border-right-alt:0.5000pt solid rgb(253,189,94);
+border-bottom:0.5000pt solid rgb(253,189,94);
+mso-border-bottom-alt:0.5000pt solid rgb(253,189,94);
+border-left:0.5000pt solid rgb(253,189,94);
+mso-border-left-alt:0.5000pt solid rgb(253,189,94);
+padding:1pt 4pt 1pt 4pt ;
+background:rgb(253,235,159);
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:9.0000pt;
+}
+
+p.NewStyle31{
+mso-style-name:underline;
+mso-style-noshow:yes;
+margin-top:2.0000pt;
+margin-bottom:0.0000pt;
+border-bottom:1.0000pt solid rgb(79,129,189);
+mso-border-bottom-alt:1.0000pt solid rgb(79,129,189);
+padding:0pt 0pt 2pt 0pt ;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+font-size:1.0000pt;
+}
+
+p.NewStyle32{
+mso-style-name:Quote;
+mso-style-next:正文;
+margin-right:36.0000pt;
+margin-bottom:10.0000pt;
+margin-left:36.0000pt;
+font-family:Calibri;
+mso-fareast-font-family:宋体;
+mso-bidi-font-family:'Times New Roman';
+color:rgb(0,0,0);
+font-size:11.0000pt;
+}
+
+p.NewStyle33{
+mso-style-name:Account;
+mso-style-noshow:yes;
+margin-bottom:0.0000pt;
+font-family:'Segoe UI';
+color:rgb(79,129,189);
+font-size:9.0000pt;
+}
+
+p.NewStyle34{
+mso-style-name:p0;
+margin-top:5.0000pt;
+margin-bottom:5.0000pt;
+mso-margin-top-alt:auto;
+mso-margin-bottom-alt:auto;
+font-family:宋体;
+font-size:12.0000pt;
+}
+
+span.msoIns{
+mso-style-type:export-only;
+mso-style-name:"";
+text-decoration:underline;
+text-underline:single;
+color:blue;
+}
+
+span.msoDel{
+mso-style-type:export-only;
+mso-style-name:"";
+text-decoration:line-through;
+color:red;
+}
+
+table.MsoNormalTable{
+mso-style-name:普通表格;
+mso-style-parent:"";
+mso-style-noshow:yes;
+mso-tstyle-rowband-size:0;
+mso-tstyle-colband-size:0;
+mso-padding-alt:0.0000pt 5.4000pt 0.0000pt 5.4000pt;
+mso-para-margin:0pt;
+mso-para-margin-bottom:.0001pt;
+mso-pagination:widow-orphan;
+font-family:'Times New Roman';
+font-size:10.0000pt;
+mso-ansi-language:#0400;
+mso-fareast-language:#0400;
+mso-bidi-language:#0400;
+}
+@page{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}@page Section0{
+margin-top:72.0000pt;
+margin-bottom:72.0000pt;
+margin-left:90.0000pt;
+margin-right:90.0000pt;
+size:612.0000pt 792.0000pt;
+}
+div.Section0{page:Section0;}</style></head><body style="tab-interval:36pt; " ><!--StartFragment--><div class="Section0" ><p class=NewStyle24 ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:15.0000pt; " >浅谈&nbsp;dhcp服务</span><span style="mso-spacerun:'yes'; font-family:Calibri; mso-fareast-font-family:宋体; mso-bidi-font-family:'Times New Roman'; color:rgb(22,54,92); font-weight:bold; font-size:16.0000pt; " ><o:p></o:p></span></p><p class=NewStyle31 ><span style="mso-spacerun:'yes'; font-family:Calibri; mso-fareast-font-family:宋体; mso-bidi-font-family:'Times New Roman'; font-size:1.0000pt; " ><o:p>&nbsp;</o:p></span></p><p class=NewStyle28 ><span style="mso-spacerun:'yes'; font-family:Calibri; mso-fareast-font-family:宋体; mso-bidi-font-family:'Times New Roman'; font-size:1.0000pt; " ><o:p>&nbsp;</o:p></span></p><p class=MsoNormal  style="margin-right:9.0000pt; margin-bottom:0.0000pt; line-height:16.5000pt; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:9.0000pt; " >原创作品，允许转载，转载时请务必以超链接形式标明文章&#160;</span><span><a href="http://xiaoxiaozhou.blog.51cto.com/4681537/1284568" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); text-decoration:underline; text-underline:single; font-size:9.0000pt; " >原始出处</span></a></span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:9.0000pt; " >&#160;、作者信息和本声明。否则将追究法律责任。</span><span><a href="http://xiaoxiaozhou.blog.51cto.com/4681537/1284568" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:9.0000pt; " >http://xiaoxiaozhou.blog.51cto.com/4681537/1284568</span></a></span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:9.0000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >DHCP(Dynamic&nbsp;Host&nbsp;Configuration&nbsp;Protocol)动态主机配置协议，作用就是动态的管理</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址、子网掩码、网关、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dns</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >指向等一系列参数。为什么需要动态管理呢，手动不是也可以完成这些参数的配置吗？是啊，不过在日常生活中不可能每个人都对电脑的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址和其他参数有所了解，而且在大的机房环境中我们手动配置的话也需要大量的工作。这时候就需要我们来我们来集中管理这些机器，那么应该怎样实现集中管理呢？&nbsp;&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >当然要想实现动态管理</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >等参数需要我们具备</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dhcp&nbsp;server</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >，而客户端只需要动态获得就行了，是不是很方便啊。实现</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dhcp&nbsp;server&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >在很多设备上都可以实现，比如网络设备（宽带路由器、路由器、防火墙和三层交换机）或者主机（</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >windows</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >系统、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >linux</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >系统）。而要想实现</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dhcp</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >客户端就相对容易得多，只需要客户端支持</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >tcp/ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >协议栈，另外</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址设为自动获得就行了。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >一、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >dhcp</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >的工作模式：</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;1、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >manual(</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >手动</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >)</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><img width="743"  height="411"  src="浅谈dhcp服务.files/浅谈dhcp服务690.png" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&nbsp;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >如上图所示，</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dhcp</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >服务器端存放着一个</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >mac</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址和对应</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址的条目（手动配置），当客户端发出广播帧同时服务器端也收到，服务器就会把帧内的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >mac</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >与自己存放的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >mac</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址作对比，如果相同的话，就把对应的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址发送给客户端，那么客户端就获得了</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >manual模式的特点：</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;可动态获得</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >地址</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;管理员工作量大（假如客户端较多时）</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;地址利用率低</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >2、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >automatic</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >（自动）</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >这种方式就是在服务器端地址池里设置一个地址范围（起始地址、结束地址），当客户端发送一个请求给服务器端时，服务器端就会从地址池中挑一个没人用地址给客户端，那么客户端就获得了</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >automatic模式的特点：</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;可动态获得</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >地址</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;地址利用率低（</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >地址和</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >mac</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >为永久绑定）</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;简化了管理员的工作</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >3、</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dynamic(</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >动态</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >)</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >这种模式与第二种模式类似，都有个地址池，服务器端从地址池中为客户端挑选地址。区别在于服务器在分配给客户端的地址是有租约期限的，这样就保证了地址的回收重利用。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dynamic模式的特点：</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;可动态获得</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >地址</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;地址利用率高</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >&#160;大大简化了管理员的工作</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >虽然实现</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >dhcp</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的方式有以上三种，不过我们常用的也就是第一种和第三种。第一种用在我们不需要经常更改</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址的环境中（例如服务器的地址），而第三种用在绝大多数的环境中。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >二、&#160;</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >dynamic</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >的实现步骤：（如下图所示）</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >&#160;</span><img width="720"  height="192"  src="浅谈dhcp服务.files/浅谈dhcp服务1302.png" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&nbsp;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;1、客户端发送一个</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcpdiscover</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >广播包，请求获得</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;2、当然这时候客户端还没有</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址，所以服务器端收到后就发送一个</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcpoffer</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的广播包，其中仅仅包含了客户端请求的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址（</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >这里的服务器端可能不止一个哟</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >）</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;3、客户端在收到</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcpoffer</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的广播包后，就会向期望获得</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址的的服务器回送一个</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcprequest</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的广播请求，请求获得除</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址外的其他参数。（其他服务器在收到后得知自己提供的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址没有被请求时就会回收准备提供的地址）。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;4、被请求的服务器端在收到请求后就会向客户端发送一个</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcpack</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的应答包，其中包含了</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址和其他一系列参数。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-weight:bold; font-size:10.5000pt; " >三、地址续租</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;所谓续租就是</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >ip</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >地址租期自动更新的过程，续租发生在下面的两种情况下：</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;1、当客户端系统重启后，客户端会向服务器端发送</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcprequest</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的包，被请求的服务器端在收到后就会更新客户端的地址租约。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#160;2、当到租约时间的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-weight:bold; font-size:10.5000pt; " >50%</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的时候，客户端会向服务器端发送</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-size:10.5000pt; " >dhcprequest</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的包，被请求的服务器端在收到后就会更新客户端的地址租约。假如租约时间</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >50%</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的时候请求没有回复，则客户端会在租约时间的</span><span style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; color:rgb(255,0,0); font-weight:bold; font-size:10.5000pt; " >87.5%</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >的时候再次向服务器端发送请求，从而获得续租。</span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal  style="margin-bottom:0.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p>&nbsp;</o:p></span></p><p class=MsoNormal  style="margin-bottom:6.0000pt; line-height:200%; background:rgb(255,255,255); " ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >本文出自&nbsp;&#8220;</span><span><a href="http://xiaoxiaozhou.blog.51cto.com/" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >xiaoxiaozhou</span></a></span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >&#8221;&nbsp;博客，请务必保留此出处</span><span><a href="http://xiaoxiaozhou.blog.51cto.com/4681537/1284568" ><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " >http://xiaoxiaozhou.blog.51cto.com/4681537/1284568</span></a></span><span style="mso-spacerun:'yes'; font-family:宋体; color:rgb(80,80,80); font-size:10.5000pt; " ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes'; font-family:Calibri; mso-fareast-font-family:宋体; mso-bidi-font-family:'Times New Roman'; font-size:11.0000pt; " ><o:p>&nbsp;</o:p></span></p></div><!--EndFragment--></body></html>

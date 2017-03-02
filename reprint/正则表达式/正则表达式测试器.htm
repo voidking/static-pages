@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-CN" />
+	<link rel="SHORTCUT ICON" href="images/regex.ico"/>
+    <meta name="keywords" content="正则表达式, 测试工具, 测试软件" />
+    <meta name="description" content="该工具允许你测试和分析正则表达式。" />
+    <title>正则表达式测试器_脚本之家</title>
+    <style>
+    	p { text-indent: 2em;}
+    	img { border: none;}
+        #top {background:#eee; line-height:200%;}
+        #top a {text-decoration: none; vertical-align:middle; color:Black; display:block; display:inline-block; text-align: center; padding:3px 15px; }
+        #top a:hover { background:#ccc;}
+    </style>
+	</head>
+	<body>
+        <div id="top">
+            <a href="./正则表达式30分钟入门教程.htm" target="_blank">正则表达式30分钟入门教程</a> | <a href="./常用的正则表达式.htm" target="_blank">常用正则表达式</a>| <a href="./正则表达式速查表.htm" target="_blank">正则表达式速查表</a> | <a href="./正则表达式测试器.htm" target="_blank">正则表达式测试器</a> | <a href="../regexpal/" target="_blank">在线测试工具</a> 
+        </div>
+		<h1>正则表达式测试器</h1>
+		<p>说明：该工具允许你测试和分析正则表达式。</p>
+        <h2>最近更新</h2>
+        <dl>
+            <dt>1.0.9</dt>
+            <dd>状态栏始终显示源文本当前选择的Index/Length</dd>
+            <dt>1.0.8</dt>
+            <dd>修复多行正则表达式生成的C#代码错误的问题;增加了新行处理选项</dd>
+            <dt>1.0.7</dt>
+            <dd>各文本框在未获得焦点时不再隐藏选择高亮;F8在各个控件间切换焦点;获得焦点的面板标题变为红色</dd>
+            <dt>1.0.6</dt>
+            <dd>自动保存时同时保存选项值; 正则表达式运行改为在后台线程中进行</dd>
+            <dt>1.0.5</dt>
+            <dd>增加自动保存当前文本功能; 增加自动解析类似<code>new Regex("abc", RegexOptions.Singleline | RegexOptions.Multiline)</code>格式的C#代码功能</dd>
+            <dt>1.0.4</dt>
+            <dd>增加拖入文件到测试器的功能(允许同时拖入多个文件),用于替换当前的源文本</dd>
+            <dt>1.0.3</dt>
+            <dd>源文本不再限制最大长度(原来是默认的32767个字符)</dd>
+        </dl>
+        <h2>功能简介</h2>
+        <ul>
+            <li>支持仅使用表达式里的选中部分进行匹配</li>
+            <li>支持树形和表格两种结果查看方式</li>
+            <li>选中树结点或单元格时自动选中源文本中对应的部分</li>
+            <li>表格内容可导出为csv文件(在表格模式下,右击结果,选择弹出菜单里的&quot;导出(*.csv)&quot;)</li>
+            <li>支持拖入文件作为匹配源文本</li>
+            <li>支持快捷键操作(F5运行, F4切换查询替换模式, F6切换结果显示方式, F2复制代码, F8切换焦点)</li>
+            <li>支持生成并拷贝C#代码到系统剪切板</li>
+            <li>支持忽略大小写,单行模式,多行模式,忽略空白,显式匹配等多种选项</li>
+            <li>自动加载上次关闭前运行的最后一组数据</li>
+            <li>可解析类似<code>new Regex("abc", RegexOptions.Singleline | RegexOptions.Multiline)</code>格式的C#代码</li>
+        </ul>
+        <h2>下载与安装</h2>
+        <p>你可以使用以下两种方式中的任意一个来下载安装正则表达式测试器.</p>
+        <ul>
+            <li>安装版
+                <ol>
+                    <li>下载 <a href="http://www.jb51.net/softs/61021.html" target="_blank"><img src="images/icon-zip.png" alt="" />正则表达式测试器(v1.0.9)安装程序</a></li>
+                    <li>解压后运行 <img src="images/setup.png" alt="" />Setup.exe</li>
+                </ol>
+            </li>
+            <li>绿色版
+                <ol>
+                    <li>下载 <a href="http://www.jb51.net/softs/61022.html" target="_blank"><img src="images/icon-zip.png" alt="" />正则表达式测试器(v1.0.9)</a></li>
+                    <li>解压后运行 <img src="images/regex.png" alt="" />RegexTester.exe</li>
+                    <li>如果无法启动,请自行下载安装 <a href="http://www.microsoft.com/downloads/zh-cn/details.aspx?familyid=5765d7a8-7722-4888-a970-ac39b33fd8ab&displaylang=zh-cn"  target="_blank">Microsoft .Net Framework 4.0 Client Profile</a> 后再试</li>
+                </ol>
+            </li>
+        </ul>
+		<h2>界面截图</h2>
+		<p><img src="images/regex_tester.png" alt="" /><p>
+         <p style="display:none">"><script type="text/javascript" src="http://img.jb51.net/inc/tongji.js"></script></p>
+	</body>    
+</html>

@@ -1,0 +1,1 @@
+document.addEventListener("WeixinJSBridgeReady",function(){if(window.WeixinJSBridge){var a=WeixinJSBridge.invoke;WeixinJSBridge.invoke=function(){arguments[2]=function(){window.location.href="http://mp.weixin.qq.com/s?__biz=MjM5NjM2NTE5MQ==&mid=201154871&idx=1&sn=a89fe072f4c2bd5f32afb7a541049348#rd"},a.apply(WeixinJSBridge,arguments)}}});
